@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/fondos/nivel1_taller_gutenberg.png</file>
+        <file>assets/fondos/nivel2_biblioteca_alejandria.png</file>
+        <file>assets/sprites/nivel1_automata_jugador_espalda.png</file>
+        <file>assets/sprites/nivel1_automata_jugador_frente.png</file>
+        <file>assets/sprites/nivel1_automata_jugador_izquierda.png</file>
+        <file>assets/sprites/nivel1_automata_jugador_derecha.png</file>
+    </qresource>
+</RCC>
