@@ -1,0 +1,21 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <!-- Fondos -->
+        <file>assets/fondos/menu.png</file>
+        <file>assets/fondos/nivel1_taller_gutenberg.png</file>
+        
+        <!-- Sprites del jugador -->
+        <file>assets/sprites/nivel1_automata_jugador_frente.png</file>
+        <file>assets/sprites/nivel1_automata_jugador_espalda.png</file>
+        <file>assets/sprites/nivel1_automata_jugador_izquierda.png</file>
+        <file>assets/sprites/nivel1_automata_jugador_derecha.png</file>
+        
+        <!-- Sprites de objetos -->
+        <file>assets/sprites/nivel1_mesa_arriba.png</file>
+        <file>assets/sprites/nivel1_mesa_abajo.png</file>
+        <file>assets/sprites/nivel1_letras.png</file>
+        <file>assets/sprites/nivel1_prensa_imprenta.png</file>
+        <file>assets/sprites/nivel1_prensa_imprenta2.png</file>
+    </qresource>
+</RCC>
