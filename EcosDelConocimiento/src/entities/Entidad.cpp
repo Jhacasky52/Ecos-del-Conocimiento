@@ -7,9 +7,10 @@ Entidad::Entidad(float x, float y)
       posY(y),
       velocidadX(0.0f),
       velocidadY(0.0f),
+      ancho(50),
+      alto(50),
       activo(true)
 {
-    qDebug() << "[Entidad] Creada en posición:" << posX << "," << posY;
 }
 
 void Entidad::setPosicion(float x, float y)

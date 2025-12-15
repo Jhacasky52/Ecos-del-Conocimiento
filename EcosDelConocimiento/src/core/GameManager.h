@@ -3,14 +3,14 @@
 
 #include <QObject>
 
-/**
- * @brief Gestor principal del juego.
- * 
- * Controla el flujo general del juego:
- * - Estados del juego (menú, jugando, pausa, game over)
- * - Transiciones entre niveles
- * - Guardado/carga de progreso
- */
+//
+//Gestor principal del juego.
+// 
+// Controla el flujo general del juego:
+// - Estados del juego (menú, jugando, pausa, game over)
+// - Transiciones entre niveles
+// - Guardado/carga de progreso
+
 class GameManager : public QObject
 {
     Q_OBJECT

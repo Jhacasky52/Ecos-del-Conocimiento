@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,11 +27,25 @@ HEADERS += \
     src/entities/Jugador.h \
     src/entities/Automata.h \
     src/entities/Letra.h \
+    src/entities/Cuervo.h \
+    src/entities/Pergamino.h \
+    src/entities/Cubeta.h \
+    src/entities/FuegoAire.h \
+    src/entities/FuegoPiso.h \
+    src/entities/Virus.h \
+    src/entities/Firewall.h \
+    src/entities/Nodo.h \
+    src/entities/Fragmento.h \
+    src/entities/CampoFuerza.h \
+    src/entities/Guardian.h \
     src/gui/MainWindow.h \
     src/gui/Menu.h \
     src/gui/Nivel1.h \
+    src/gui/Nivel2.h \
+    src/gui/Nivel3.h \
     src/managers/ResourceManager.h \
     src/managers/DifficultyManager.h \
+    src/managers/SoundManager.h \
     src/physics/PhysicsEngine.h
 
 # =============================================================================
@@ -44,9 +58,22 @@ SOURCES += \
     src/entities/Jugador.cpp \
     src/entities/Automata.cpp \
     src/entities/Letra.cpp \
+    src/entities/Cuervo.cpp \
+    src/entities/Pergamino.cpp \
+    src/entities/Cubeta.cpp \
+    src/entities/FuegoAire.cpp \
+    src/entities/FuegoPiso.cpp \
+    src/entities/Virus.cpp \
+    src/entities/Firewall.cpp \
+    src/entities/Nodo.cpp \
+    src/entities/Fragmento.cpp \
+    src/entities/CampoFuerza.cpp \
+    src/entities/Guardian.cpp \
     src/gui/MainWindow.cpp \
     src/gui/Menu.cpp \
     src/gui/Nivel1.cpp \
+    src/gui/Nivel2.cpp \
+    src/gui/Nivel3.cpp \
     src/managers/ResourceManager.cpp \
     src/managers/DifficultyManager.cpp \
     src/physics/PhysicsEngine.cpp

@@ -3,18 +3,18 @@
 
 #include <QPainter>
 
-/**
- * @brief Clase base abstracta para todas las entidades del juego.
- * 
- * Esta es una HERENCIA PROPIA (no de Qt) que cumple con el requisito
- * del proyecto. Jugador, Automata y Letra heredan de esta clase.
- * 
- * Proporciona:
- * - Posición (posX, posY)
- * - Velocidad (velocidadX, velocidadY)
- * - Estado activo/inactivo
- * - Métodos virtuales puros para actualizar y dibujar
- */
+//
+//Clase base abstracta para todas las entidades del juego.
+// 
+// Esta es una HERENCIA PROPIA (no de Qt) que cumple con el requisito
+// del proyecto. Jugador, Automata y Letra heredan de esta clase.
+// 
+// Proporciona:
+// - Posición (posX, posY)
+// - Velocidad (velocidadX, velocidadY)
+// - Estado activo/inactivo
+// - Métodos virtuales puros para actualizar y dibujar
+
 class Entidad
 {
 public:
@@ -26,16 +26,16 @@ public:
     // MÉTODOS VIRTUALES PUROS - Deben ser implementados por las clases hijas
     // =========================================================================
     
-    /**
-     * @brief Actualiza el estado de la entidad cada frame
-     * @param deltaTime Tiempo transcurrido desde el último frame
-     */
+    //
+    // Actualiza el estado de la entidad cada frame
+    // Param: deltaTime Tiempo transcurrido desde el último frame
+    
     virtual void actualizar(float deltaTime) = 0;
     
-    /**
-     * @brief Dibuja la entidad en pantalla
-     * @param painter Objeto QPainter para renderizar
-     */
+    //
+    // Dibuja la entidad en pantalla
+    //Param: painter Objeto QPainter para renderizar
+    
     virtual void dibujar(QPainter &painter) = 0;
 
     // =========================================================================
@@ -51,26 +51,35 @@ public:
     // SETTERS
     // =========================================================================
     virtual void setPosicion(float x, float y);
+    void setPosX(float x) { posX = x; }
+    void setPosY(float y) { posY = y; }
     void setVelocidad(float vx, float vy);
     void setActivo(bool estado) { activo = estado; }
+    void setTamanio(int w, int h) { ancho = w; alto = h; }
+
+    // =========================================================================
+    // GETTERS ADICIONALES
+    // =========================================================================
+    int getAncho() const { return ancho; }
+    int getAlto() const { return alto; }
 
     // =========================================================================
     // MÉTODOS DE UTILIDAD
     // =========================================================================
     
-    /**
-     * @brief Calcula la distancia a otra entidad
-     * @param otra Puntero a otra entidad
-     * @return Distancia euclidiana
-     */
+    //
+    // Calcula la distancia a otra entidad
+    //Param: otra Puntero a otra entidad
+    //Return: Distancia euclidiana
+    
     float distanciaA(const Entidad* otra) const;
     
-    /**
-     * @brief Calcula la distancia a un punto
-     * @param x Coordenada X del punto
-     * @param y Coordenada Y del punto
-     * @return Distancia euclidiana
-     */
+    //
+    // Calcula la distancia a un punto
+    // Param: x Coordenada X del punto
+    // Param: y Coordenada Y del punto
+    // Return: Distancia euclidiana
+    
     float distanciaA(float x, float y) const;
 
 protected:
@@ -81,6 +90,10 @@ protected:
     // Velocidad actual
     float velocidadX;
     float velocidadY;
+    
+    // Tamaño de la entidad
+    int ancho;
+    int alto;
     
     // Estado de la entidad
     bool activo;

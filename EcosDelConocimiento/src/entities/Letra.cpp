@@ -72,6 +72,32 @@ void Letra::setSoltada(float posXSoltada, float posYSoltada)
              << "Vx:" << (int)velocidadX << "Vy:" << (int)velocidadY;
 }
 
+void Letra::setSoltadaSinMovimiento(float posXSoltada, float posYSoltada)
+{
+    // Método para que el autómata suelte la letra SIN movimiento parabólico
+    // La letra simplemente cae hacia abajo desde donde se soltó
+    recogida = false;
+    enReposo = false;
+    
+    posX = posXSoltada;
+    posY = posYSoltada;
+    
+    // Sin velocidad horizontal, solo caída vertical suave
+    velocidadX = 0.0f;
+    velocidadY = 0.0f;  // La gravedad se encargará
+    
+    // El piso es un poco más abajo de donde se soltó (caída corta)
+    pisoDinamico = posYSoltada + 80.0f;  // Solo 80 píxeles de caída
+    
+    // Limitar el piso
+    if (pisoDinamico > 720.0f) pisoDinamico = 720.0f;
+    if (pisoDinamico < 280.0f) pisoDinamico = 280.0f;
+    
+    qDebug() << "[Letra] Soltada SIN parábola (autómata):" << letra 
+             << "en X:" << (int)posX << "Y:" << (int)posY
+             << "caerá hasta:" << (int)pisoDinamico;
+}
+
 void Letra::lanzar(float anguloGrados, float velocidadInicial)
 {
     float rad = anguloGrados * M_PI / 180.0f;
@@ -93,21 +119,24 @@ void Letra::detener()
 
 void Letra::resetearPosicion()
 {
-    // Reaparece desde arriba
-    posY = 180.0f + QRandomGenerator::global()->bounded(50);
-    
+    posY = 150.0f + QRandomGenerator::global()->bounded(20);
+
     float nuevoX;
     do {
         nuevoX = 100.0f + QRandomGenerator::global()->bounded(820);
-    } while (nuevoX >= 313.0f && nuevoX <= 648.0f);
+    } while (nuevoX >= 280.0f && nuevoX <= 680.0f);
 
     posX = nuevoX;
     velocidadX = 0.0f;
     velocidadY = 0.0f;
-    
-    // Piso aleatorio donde se detendrá
-    pisoDinamico = 350.0f + QRandomGenerator::global()->bounded(300);
-    enReposo = false;  // Cae de nuevo
+
+    pisoDinamico = 600.0f + QRandomGenerator::global()->bounded(120);
+
+    enReposo = false;
+
+    qDebug() << "[Letra] Reaparece en Y:" << (int)posY
+             << "Piso en:" << (int)pisoDinamico
+             << "X:" << (int)posX;
 }
 
 void Letra::getLetraCoords(char l, int &col, int &row) const
@@ -228,7 +257,7 @@ void Letra::actualizar(float deltaTime)
 
 void Letra::dibujar(QPainter &painter)
 {
-    painter.fillRect(posX - anchoLetra/2, posY - altoLetra/2, 
+    painter.fillRect(posX - anchoLetra/2, posY - altoLetra/2,
                      anchoLetra, altoLetra, QColor(200, 150, 100));
     painter.setPen(Qt::black);
     painter.setFont(QFont("Arial", 20, QFont::Bold));
@@ -245,16 +274,24 @@ void Letra::dibujar(QPainter &painter, const QPixmap &spriteLetras)
     int col, row;
     getLetraCoords(letra, col, row);
 
-    int spriteWidth = spriteLetras.width() / 5;
-    int spriteHeight = spriteLetras.height() / 5;
+    const int SPRITE_SIZE = 100;
+    const int MARGIN = 4;  // Restar 1px de cada lado
 
-    QRect src(col * spriteWidth, row * spriteHeight, spriteWidth, spriteHeight);
-    QRect dst(posX - anchoLetra / 2, posY - altoLetra / 2, anchoLetra, altoLetra);
+    int srcX = col * SPRITE_SIZE + MARGIN;
+    int srcY = row * SPRITE_SIZE + MARGIN;
+    int srcW = SPRITE_SIZE - MARGIN * 2;  // 98
+    int srcH = SPRITE_SIZE - MARGIN * 2;  // 98
 
+    QRect src(srcX, srcY, srcW, srcH);
+    QRect dst(posX - anchoLetra / 2, posY - altoLetra / 2,
+              anchoLetra, altoLetra);
+
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
     painter.drawPixmap(dst, spriteLetras, src);
 
-    if (recogida) {
-        painter.setPen(QPen(Qt::yellow, 2));
-        painter.drawRect(dst);
-    }
+    // QUITADO: Ya no dibujar el cuadro amarillo cuando está recogida
+    // if (recogida) {
+    //     painter.setPen(QPen(Qt::yellow, 2));
+    //     painter.drawRect(dst);
+    // }
 }

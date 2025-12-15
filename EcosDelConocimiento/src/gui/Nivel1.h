@@ -10,15 +10,15 @@
 #include "Letra.h"
 #include "Automata.h"
 
-/**
- * @brief Clase que gestiona el Nivel 1 del juego.
- * 
- * Responsabilidades:
- * - Gestión de entidades (jugador, autómata, letras)
- * - Lógica del puzzle de palabras
- * - Sistema de colisiones
- * - Renderizado del nivel
- */
+//
+// Clase que gestiona el Nivel 1 del juego.
+// 
+// Responsabilidades:
+// - Gestión de entidades (jugador, autómata, letras)
+// - Lógica del puzzle de palabras
+// - Sistema de colisiones
+// - Renderizado del nivel
+
 class Nivel1 : public QObject
 {
     Q_OBJECT

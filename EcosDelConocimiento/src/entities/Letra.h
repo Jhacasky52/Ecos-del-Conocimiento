@@ -8,18 +8,18 @@
 #include <QRect>
 #include "Entidad.h"  // Herencia propia
 
-/**
- * @brief Clase que representa una letra del puzzle.
- * 
- * Hereda de:
- * - QObject: Para señales/slots de Qt
- * - Entidad: Herencia propia (requisito del proyecto)
- * 
- * Implementa física de:
- * - Caída libre (gravedad)
- * - Rebote con fricción
- * - Movimiento parabólico (lanzamiento)
- */
+//
+// Clase que representa una letra del puzzle.
+// 
+// Hereda de:
+// - QObject: Para señales/slots de Qt
+// - Entidad: Herencia propia
+// 
+// Implementa física de:
+// - Caída libre (gravedad)
+// - Rebote con fricción
+// - Movimiento parabólico (lanzamiento)
+
 class Letra : public QObject, public Entidad
 {
     Q_OBJECT
@@ -52,31 +52,37 @@ public:
     // FÍSICA
     // =========================================================================
     
-    /**
-     * @brief Inicia la caída de la letra (usado al crear)
-     */
+    //
+    // Inicia la caída de la letra (usado al crear)
+    
     void iniciarCaida(float pisoDestino);
     
-    /**
-     * @brief Suelta la letra con movimiento parabólico
-     */
+    //
+    // Suelta la letra con movimiento parabólico
+    
     void setSoltada(float posXSoltada, float posYSoltada);
     
-    /**
-     * @brief Lanza la letra con movimiento parabólico
-     * @param anguloGrados Ángulo de lanzamiento (0-90)
-     * @param velocidadInicial Velocidad inicial del lanzamiento
-     */
+    //
+    // Suelta la letra SIN movimiento parabólico (para autómata)
+    // * La letra simplemente cae hacia abajo desde donde se suelta
+    
+    void setSoltadaSinMovimiento(float posXSoltada, float posYSoltada);
+    
+    //
+    // Lanza la letra con movimiento parabólico
+    // Param: anguloGrados Ángulo de lanzamiento (0-90)
+    // Param: velocidadInicial Velocidad inicial del lanzamiento
+    
     void lanzar(float anguloGrados, float velocidadInicial);
     
-    /**
-     * @brief Detiene completamente la letra
-     */
+    //
+    // Detiene completamente la letra
+    
     void detener();
     
-    /**
-     * @brief Reaparece desde arriba en posición aleatoria
-     */
+    //
+    // Reaparece desde arriba en posición aleatoria
+    
     void resetearPosicion();
 
     // =========================================================================
@@ -85,9 +91,9 @@ public:
     QRect getBoundingBox() const;
     bool colisiona(float x, float y) const;
 
-    /**
-     * @brief Dibuja la letra usando el sprite sheet
-     */
+    //
+    // Dibuja la letra usando el sprite sheet
+    
     void dibujar(QPainter &painter, const QPixmap &spriteLetras);
 
 private:

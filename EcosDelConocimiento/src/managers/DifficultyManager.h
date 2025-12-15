@@ -4,17 +4,10 @@
 #include <QDebug>
 #include <QString>
 
-/**
- * @brief Gestor de dificultad del juego (Singleton).
- * 
- * Implementa el sistema de dificultad progresiva requerido por el proyecto.
- * Controla:
- * - Tiempo límite por nivel
- * - Velocidad del jugador
- * - Número de letras
- * - Velocidad del autómata
- * - Progresión automática de dificultad
- */
+// Gestor de dificultad del juego (Singleton)
+// Implementa el sistema de dificultad progresiva
+// Controla: tiempo límite, velocidad del jugador, número de letras,
+// velocidad del autómata y progresión automática de dificultad
 
 enum class Dificultad {
     FACIL,
@@ -24,22 +17,13 @@ enum class Dificultad {
 
 class DifficultyManager {
 public:
-    /**
-     * @brief Obtiene la instancia única del DifficultyManager
-     */
+    // Obtiene la instancia única del DifficultyManager
     static DifficultyManager& getInstance() {
         static DifficultyManager instance;
         return instance;
     }
     
-    // =========================================================================
-    // GETTERS DE PARÁMETROS DE JUEGO
-    // =========================================================================
-    
-    /**
-     * @brief Obtiene el tiempo límite según la dificultad
-     * @return Tiempo en segundos
-     */
+    // Obtiene el tiempo límite según la dificultad (en segundos)
     float getTiempoLimite() const {
         switch(nivelActual) {
             case Dificultad::FACIL:   return 90.0f;
@@ -49,10 +33,7 @@ public:
         }
     }
     
-    /**
-     * @brief Obtiene la velocidad del jugador según la dificultad
-     * @return Velocidad en píxeles/segundo
-     */
+    // Obtiene la velocidad del jugador según la dificultad (píxeles/segundo)
     float getVelocidadJugador() const {
         switch(nivelActual) {
             case Dificultad::FACIL:   return 350.0f;
@@ -62,10 +43,7 @@ public:
         }
     }
     
-    /**
-     * @brief Obtiene el número de letras según la dificultad
-     * @return Cantidad de letras en el nivel
-     */
+    // Obtiene el número de letras según la dificultad
     int getNumeroLetras() const {
         switch(nivelActual) {
             case Dificultad::FACIL:   return 25;
@@ -75,35 +53,27 @@ public:
         }
     }
     
-    /**
-     * @brief Obtiene la velocidad del autómata según la dificultad
-     * @return Velocidad en píxeles/segundo
-     */
+    // Obtiene la velocidad del autómata según la dificultad (píxeles/segundo)
     float getVelocidadAutomata() const {
         switch(nivelActual) {
             case Dificultad::FACIL:   return 150.0f;
-            case Dificultad::NORMAL:  return 250.0f;
-            case Dificultad::DIFICIL: return 350.0f;
-            default: return 250.0f;
+            case Dificultad::NORMAL:  return 200.0f;
+            case Dificultad::DIFICIL: return 250.0f;
+            default: return 200.0f;
         }
     }
     
-    /**
-     * @brief Obtiene el rango de interacción según la dificultad
-     * @return Rango en píxeles
-     */
+    // Obtiene el rango de interacción según la dificultad (píxeles)
     float getRangoInteraccion() const {
         switch(nivelActual) {
-            case Dificultad::FACIL:   return 120.0f;
-            case Dificultad::NORMAL:  return 80.0f;
-            case Dificultad::DIFICIL: return 50.0f;
-            default: return 80.0f;
+            case Dificultad::FACIL:   return 160.0f;
+            case Dificultad::NORMAL:  return 140.0f;
+            case Dificultad::DIFICIL: return 120.0f;
+            default: return 160.0f;
         }
     }
     
-    /**
-     * @brief Obtiene puntos por letra correcta según dificultad
-     */
+    // Obtiene puntos por letra correcta según dificultad
     int getPuntosPorLetra() const {
         switch(nivelActual) {
             case Dificultad::FACIL:   return 50;
@@ -113,9 +83,7 @@ public:
         }
     }
     
-    /**
-     * @brief Obtiene penalización por error según dificultad
-     */
+    // Obtiene penalización por error según dificultad
     int getPenalizacionError() const {
         switch(nivelActual) {
             case Dificultad::FACIL:   return 5;
@@ -126,17 +94,83 @@ public:
     }
     
     // =========================================================================
-    // CONTROL DE DIFICULTAD
+    // PARÁMETROS ESPECÍFICOS NIVEL 2 - BIBLIOTECA EN LLAMAS
     // =========================================================================
     
-    /**
-     * @brief Obtiene el nivel de dificultad actual
-     */
+    // Obtiene el tiempo límite del Nivel 2 según dificultad
+    float getTiempoLimiteNivel2() const {
+        switch(nivelActual) {
+            case Dificultad::FACIL:   return 240.0f;  // 4 minutos
+            case Dificultad::NORMAL:  return 180.0f;  // 3 minutos
+            case Dificultad::DIFICIL: return 120.0f;  // 2 minutos
+            default: return 180.0f;
+        }
+    }
+    
+    // Obtiene el intervalo entre spawns de fuego
+    float getIntervaloSpawnFuego() const {
+        switch(nivelActual) {
+            case Dificultad::FACIL:   return 2.5f;    // Fuego más lento
+            case Dificultad::NORMAL:  return 1.5f;
+            case Dificultad::DIFICIL: return 0.8f;    // Fuego muy frecuente
+            default: return 1.5f;
+        }
+    }
+    
+    // Obtiene el intervalo entre spawns de pergaminos
+    float getIntervaloSpawnPergamino() const {
+        switch(nivelActual) {
+            case Dificultad::FACIL:   return 3.0f;    // Pergaminos más frecuentes
+            case Dificultad::NORMAL:  return 4.0f;
+            case Dificultad::DIFICIL: return 5.0f;    // Menos pergaminos
+            default: return 4.0f;
+        }
+    }
+    
+    // Obtiene el tiempo de vida del fuego en el piso
+    float getTiempoFuegoPiso() const {
+        switch(nivelActual) {
+            case Dificultad::FACIL:   return 2.0f;    // Fuego dura menos
+            case Dificultad::NORMAL:  return 3.0f;
+            case Dificultad::DIFICIL: return 5.0f;    // Fuego dura más
+            default: return 3.0f;
+        }
+    }
+    
+    // Obtiene la velocidad del cuervo
+    float getVelocidadCuervo() const {
+        switch(nivelActual) {
+            case Dificultad::FACIL:   return 120.0f;  // Cuervo lento
+            case Dificultad::NORMAL:  return 180.0f;
+            case Dificultad::DIFICIL: return 250.0f;  // Cuervo muy rápido
+            default: return 180.0f;
+        }
+    }
+    
+    // Obtiene los pergaminos necesarios para ganar
+    int getPergaminosParaGanar() const {
+        switch(nivelActual) {
+            case Dificultad::FACIL:   return 4;
+            case Dificultad::NORMAL:  return 6;
+            case Dificultad::DIFICIL: return 8;
+            default: return 6;
+        }
+    }
+    
+    // Obtiene puntos por pergamino entregado
+    int getPuntosPorPergamino() const {
+        switch(nivelActual) {
+            case Dificultad::FACIL:   return 100;
+            case Dificultad::NORMAL:  return 150;
+            case Dificultad::DIFICIL: return 250;
+            default: return 150;
+        }
+    }
+    
+    // Obtiene el nivel de dificultad actual
     Dificultad getDificultadActual() const { return nivelActual; }
     
-    /**
-     * @brief Obtiene el nombre del nivel de dificultad
-     */
+    // Obtiene el nombre del nivel de dificultad
     QString getNombreDificultad() const {
         switch(nivelActual) {
             case Dificultad::FACIL:   return "FÁCIL";
@@ -146,17 +180,34 @@ public:
         }
     }
     
-    /**
-     * @brief Establece manualmente el nivel de dificultad
-     */
+    // Establece manualmente el nivel de dificultad
     void setDificultad(Dificultad nivel) {
         nivelActual = nivel;
         qDebug() << "[DifficultyManager] Dificultad establecida:" << getNombreDificultad();
     }
     
-    /**
-     * @brief Registra una ronda completada y ajusta dificultad si corresponde
-     */
+    // Establece la dificultad usando un entero (0=Fácil, 1=Normal, 2=Difícil)
+    void setDificultad(int nivel) {
+        switch(nivel) {
+            case 0: nivelActual = Dificultad::FACIL; break;
+            case 1: nivelActual = Dificultad::NORMAL; break;
+            case 2: nivelActual = Dificultad::DIFICIL; break;
+            default: nivelActual = Dificultad::NORMAL; break;
+        }
+        qDebug() << "[DifficultyManager] Dificultad establecida:" << getNombreDificultad();
+    }
+    
+    // Obtiene la dificultad como entero (0=Fácil, 1=Normal, 2=Difícil)
+    int getDificultad() const {
+        switch(nivelActual) {
+            case Dificultad::FACIL: return 0;
+            case Dificultad::NORMAL: return 1;
+            case Dificultad::DIFICIL: return 2;
+            default: return 1;
+        }
+    }
+    
+    // Registra una ronda completada y ajusta dificultad si corresponde
     void registrarRondaCompletada() {
         rondasCompletadas++;
         qDebug() << "[DifficultyManager] Rondas completadas:" << rondasCompletadas;
@@ -171,18 +222,14 @@ public:
         }
     }
     
-    /**
-     * @brief Reinicia el progreso de dificultad
-     */
+    // Reinicia el progreso de dificultad
     void reiniciar() {
         nivelActual = Dificultad::FACIL;
         rondasCompletadas = 0;
         qDebug() << "[DifficultyManager] Progreso reiniciado";
     }
     
-    /**
-     * @brief Obtiene el número de rondas completadas
-     */
+    // Obtiene el número de rondas completadas
     int getRondasCompletadas() const { return rondasCompletadas; }
 
 private:

@@ -9,13 +9,12 @@
 
 class Letra;  // Forward declaration
 
-/**
- * @brief Clase que representa al jugador del juego.
- * 
- * Hereda de:
- * - QObject: Para señales/slots de Qt
- * - Entidad: Herencia propia (requisito del proyecto)
- */
+////Clase que representa al jugador del juego.
+// 
+// Hereda de:
+// - QObject: Para señales/slots de Qt
+// - Entidad: Herencia propia
+
 class Jugador : public QObject, public Entidad
 {
     Q_OBJECT
@@ -41,12 +40,13 @@ public:
     // MÉTODOS ESPECÍFICOS DEL JUGADOR
     // =========================================================================
     
-    /**
-     * @brief Actualiza el jugador con entrada del teclado
-     */
+    //
+    // Actualiza el jugador con entrada del teclado
+    
     void actualizar(bool arriba, bool abajo, bool izquierda, bool derecha, float deltaTime);
     
     Direccion getDireccion() const { return direccion; }
+    float getVelocidadMovimiento() const { return velocidadMovimiento; }
     void setVelocidadMovimiento(float vel) { velocidadMovimiento = vel; }
     void setLimites(float ancho, float alto);
     void cargarSprites();
@@ -54,6 +54,7 @@ public:
     // Sistema de letras recogidas
     QVector<Letra*> getLetrasRecogidas() const { return letrasRecogidas; }
     void agregarLetra(Letra *letra) { letrasRecogidas.append(letra); }
+    void recogerLetra(Letra *letra) { letrasRecogidas.append(letra); }  // Alias de agregarLetra
     void soltarLetra(Letra *letra) { letrasRecogidas.removeAll(letra); }
 
 private:
