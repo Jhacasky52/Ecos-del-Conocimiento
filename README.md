@@ -1,5 +1,6 @@
 # 🎮 Ecos del Conocimiento
 
+Mauricio Aguas - Jharlin Castro 2025
 
 
 <p align="center">
@@ -240,31 +241,6 @@ EcosDelConocimiento/
 
 ## 🏗️ Arquitectura
 
-### Diagrama de Clases (Simplificado)
-
-```
-                         ┌─────────────────┐
-                         │     Entidad     │
-                         │   (Abstracta)   │
-                         └────────┬────────┘
-                                  │
-        ┌─────────────────────────┼─────────────────────────┐
-        │                         │                         │
-        ▼                         ▼                         ▼
-   ┌─────────┐              ┌──────────┐              ┌─────────┐
-   │ Jugador │              │ Automata │              │  Letra  │
-   └─────────┘              └──────────┘              └─────────┘
-        │
-        ├── Cuervo, Pergamino, Cubeta, FuegoAire, FuegoPiso
-        │
-        └── Virus, Firewall, Nodo, Fragmento, CampoFuerza, Guardian
-
-
-   ┌───────────────────┐  ┌───────────────────┐  ┌───────────────────┐
-   │ DifficultyManager │  │  ResourceManager  │  │   SoundManager    │
-   │    «Singleton»    │  │    «Singleton»    │  │    «Singleton»    │
-   └───────────────────┘  └───────────────────┘  └───────────────────┘
-```
 
 ### Capas de la Aplicación
 
@@ -422,14 +398,13 @@ ESPERANDO → BUSCANDO → RECOGIENDO → LLEVANDO → ENTREGANDO
 ## 📄 Licencia
 
 Este proyecto fue desarrollado como proyecto final para la asignatura de Informática II.
-
-Universidad EAFIT - 2024
+2025 - UdeA
 
 ---
 
 ## 🙏 Agradecimientos
 
-- Universidad EAFIT
+
 - Qt Framework
 - Inspiración histórica: Johannes Gutenberg, Biblioteca de Alejandría, Era Digital
 
