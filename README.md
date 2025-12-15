@@ -1,8 +1,6 @@
 # 🎮 Ecos del Conocimiento
 
-<p align="center">
-  <img src="assets/fondos/menu.png" alt="Ecos del Conocimiento" width="600">
-</p>
+
 
 <p align="center">
   <strong>Un viaje interactivo a través de la historia del conocimiento humano</strong>
